@@ -94,10 +94,12 @@ public class Task8 {
       }
     }
      */
-    Set<Person> persons1_set = persons1.stream().collect(Collectors.toCollection(HashSet::new));
-    Set<Person> persons2_set = persons2.stream().collect(Collectors.toSet());
-    for (Person pers: persons1_set) {
-      if (persons2_set.contains(pers)) {
+    persons1 = persons1.stream().collect(Collectors.toCollection(HashSet::new));
+    persons2 = persons2.stream().collect(Collectors.toCollection(HashSet::new));
+    //Set<Person> persons1_set = persons1.stream().collect(Collectors.toCollection(HashSet::new));
+    //Set<Person> persons2_set = persons2.stream().collect(Collectors.toSet());
+    for (Person pers: persons1) {
+      if (persons2.contains(pers)) {
         return true;
       }
     }

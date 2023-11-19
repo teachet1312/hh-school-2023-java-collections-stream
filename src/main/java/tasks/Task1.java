@@ -21,11 +21,11 @@ public class Task1 {
   }
 
   public List<Person> findOrderedPersons(List<Integer> personIds) {
-    if (personIds.size() == 0) {
-      return Collections.emptyList();
-    }
-    Set<Person> persons = personService.findPersons(personIds);
 
+    Set<Person> persons = personService.findPersons(personIds);
+    if (persons.isEmpty()) {
+      return new ArrayList<>();
+    }
     Map<Integer, Person> personsMap = new HashMap<>(); // ключ - id, значение - Person
     Iterator<Person> iter = persons.iterator(); // проход по элементам изначального множества
     while (iter.hasNext()) {

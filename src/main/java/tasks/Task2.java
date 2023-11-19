@@ -19,8 +19,14 @@ public class Task2 {
     if (persons1.isEmpty() && persons2.isEmpty()) {
       return new ArrayList<>();
     }
-    persons1.addAll(persons2);
-    List<Person> persons_ = persons1.stream()
+    List<Person> person_all = new ArrayList<>();
+    for (Person pers : persons1) {
+      person_all.add(pers);
+    }
+    for (Person pers1 : persons2) {
+      person_all.add(pers1);
+    }
+    List<Person> persons_ = person_all.stream()
             .sorted(Comparator.comparing(Person::getCreatedAt))
             .limit(limit)
             .collect(Collectors.toList());

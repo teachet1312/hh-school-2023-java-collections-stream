@@ -19,11 +19,13 @@ public class Task2 {
     persons1.addAll(persons2);
     List<Person> persons_ = persons1.stream()
             .sorted(Comparator.comparing(Person::getCreatedAt))
+            .limit(limit)
             .collect(Collectors.toList());
-    List<Person> result = new ArrayList<>();
+    /**List<Person> result = new ArrayList<>();
     for (int n = 0; n < limit; n++) {
       result.add(persons_.get(n));
     }
-    return result;
+     */
+    return persons_;
   }
 }

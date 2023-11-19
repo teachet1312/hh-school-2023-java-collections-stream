@@ -11,6 +11,9 @@ import java.util.*;
 public class Task7 {
 
   public static Set<String> vacancyNames(Collection<Company> companies) {
+    if (companies.isEmpty()) {
+      return new HashSet<>();
+    }
     Set<String> vacancy_names = new HashSet<>();
 
     for (Company comp_cur : companies) {

@@ -14,6 +14,9 @@ import java.util.stream.Collectors;
 public class Task3 {
 
   public static List<Person> sort(Collection<Person> persons) {
+    if (persons.isEmpty()) {
+      return new ArrayList<>();
+    }
     persons.stream()
             .sorted(Comparator.comparing(Person::getFirstName))
             .sorted(Comparator.comparing(Person::getSecondName))

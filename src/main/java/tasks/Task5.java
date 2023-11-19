@@ -23,6 +23,9 @@ public class Task5 {
   }
 
   public List<ApiPersonDto> convert(List<Person> persons, Map<Integer, Integer> personAreaIds) {
+    if (persons.size() == 0 || personAreaIds.isEmpty()) {
+      return new ArrayList<>();
+    }
     List<ApiPersonDto> api_person_dto = new ArrayList<>();
     for (int i = 0; i < persons.size(); i++) {
       Person person = persons.get(i);

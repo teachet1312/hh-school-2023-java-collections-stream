@@ -16,6 +16,9 @@ public class Task2 {
   public static List<Person> combineAndSortWithLimit(Collection<Person> persons1,
                                                      Collection<Person> persons2,
                                                      int limit) {
+    if (persons1.isEmpty() && persons2.isEmpty()) {
+      return new ArrayList<>();
+    }
     persons1.addAll(persons2);
     List<Person> persons_ = persons1.stream()
             .sorted(Comparator.comparing(Person::getCreatedAt))

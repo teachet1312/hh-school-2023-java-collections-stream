@@ -19,6 +19,9 @@ public class Task6 {
   public static Set<String> getPersonDescriptions(Collection<Person> persons,
                                                   Map<Integer, Set<Integer>> personAreaIds,
                                                   Collection<Area> areas) {
+    if (persons.isEmpty() || personAreaIds.isEmpty() || areas.isEmpty()) {
+      return new HashSet<>();
+    }
     // сперва список список Area преобразуем в hashMap  для быстрого поиска по региону
     Map<Integer, String> area_map = areas.stream()
             .collect(Collectors.toMap(Area::getId, Area::getName));

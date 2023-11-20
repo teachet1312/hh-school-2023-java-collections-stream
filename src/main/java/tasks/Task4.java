@@ -22,6 +22,16 @@ public class Task4 {
   }
 
   public List<ApiPersonDto> convert(List<Person> persons) {
-    return new ArrayList<>();
+    if (persons.size() == 0) {
+      return  new ArrayList<>();
+    }
+    List<ApiPersonDto> api_person_dto = new ArrayList<>();
+    for (int i = 0; i < persons.size(); i++) {
+      Person person = persons.get(i);
+
+      ApiPersonDto api_person = personConverter.convert(person);
+      api_person_dto.add(api_person);
+    }
+    return api_person_dto;
   }
 }

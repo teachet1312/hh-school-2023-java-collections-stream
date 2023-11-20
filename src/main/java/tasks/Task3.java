@@ -17,11 +17,11 @@ public class Task3 {
     if (persons.isEmpty()) {
       return new ArrayList<>();
     }
-    persons.stream()
-            .sorted(Comparator.comparing(Person::getFirstName))
-            .sorted(Comparator.comparing(Person::getSecondName))
-            .sorted(Comparator.comparing(Person::getCreatedAt))
+    List res = persons.stream()
+            .sorted(Comparator.comparing(Person::getSecondName)
+                    .thenComparing(Person::getFirstName)
+                    .thenComparing(Person::getCreatedAt))
             .collect(Collectors.toList());
-    return new ArrayList<>(persons);
+    return res;
   }
 }

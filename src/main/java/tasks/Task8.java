@@ -61,7 +61,6 @@ public class Task8 {
   public boolean hasSamePersons(Collection<Person> persons1, Collection<Person> persons2) {
 
 
-
     Set<Person> persons1_new = new HashSet<>(persons1);
     Set<Person> persons2_new = new HashSet<>(persons2);
     //привел  к хэшсету, чтоб искал быстрее, тут по идее должна получиться сложность О(N),
@@ -77,9 +76,7 @@ public class Task8 {
 
   //...
   public long countEven(Stream<Integer> numbers) {
-    count = 0;
-    numbers.filter(num -> num % 2 == 0).count();
-    // а можно через .count()
-    return count;
+
+    return numbers.filter(num -> num % 2 == 0).count();
   }
 }

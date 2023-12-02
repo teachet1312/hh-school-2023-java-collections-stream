@@ -21,10 +21,7 @@ public class Task8 {
 
   //Не хотим выдывать апи нашу фальшивую персону, поэтому конвертим начиная со второй
   public List<String> getNames(List<Person> persons) {
-    if (persons.size() == 0) {
-      return Collections.emptyList();
-    }
-    //persons.remove(0); удалять не обязательно
+
     return persons.stream()
             .map(Person::getFirstName)
             .skip(1)

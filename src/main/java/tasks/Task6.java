@@ -3,8 +3,12 @@ package tasks;
 import common.Area;
 import common.Person;
 
-import java.util.*;
-import java.util.stream.Collector;
+import javax.swing.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /*
@@ -19,34 +23,20 @@ public class Task6 {
   public static Set<String> getPersonDescriptions(Collection<Person> persons,
                                                   Map<Integer, Set<Integer>> personAreaIds,
                                                   Collection<Area> areas) {
-    if (persons.isEmpty() || personAreaIds.isEmpty() || areas.isEmpty()) {
-      return new HashSet<>();
-    }
-
-    Map<Integer, String> names = new HashMap<>();
-    for (Person pers : persons) {
-      Integer id = pers.getId();
-      String name = pers.getFirstName();
-      names.put(id, name);
-    }
-    // нужна мапа на основе листа area
-    Map<Integer, String> area_map = new HashMap<>();
-    for (Area are : areas) {
-      Integer id = are.getId();
-      String region = are.getName();
-      area_map.put(id, region);
-    }
-    Set<String> result = new HashSet();
-    for (Map.Entry<Integer, Set<Integer>> entry : personAreaIds.entrySet()) {
-      Integer person_id = entry.getKey();
-      Set<Integer> person_areas = entry.getValue();
-      String person_name = names.get(person_id); // имя человека
-      for (Integer city_id : person_areas) {
-        String city_name = area_map.get(city_id);
-        String pers_res = person_name + " - " + city_name;
-        result.add(pers_res);
+      if (persons.isEmpty() || personAreaIds.isEmpty() || areas.isEmpty()) {
+          return new HashSet<>();
       }
-    }
-    return result;
+      Map<Integer, String> areaIDName = areas.stream()
+              .collect(Collectors.toMap(Area::getId, Area::getName));
+
+      return persons.stream()
+              .flatMap(person -> personAreaIds.get(person.getId()).stream()
+                      .map(idArea -> person.getFirstName() + " - " + areaIDName.get(idArea))
+              )
+              .collect(Collectors.toSet());
+
+
+
+
   }
 }

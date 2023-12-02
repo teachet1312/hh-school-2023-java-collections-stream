@@ -20,18 +20,7 @@ public class Task2 {
     if (persons1.isEmpty() && persons2.isEmpty()) {
       return new ArrayList<>();
     }
-    /**List<Person> person_all = new ArrayList<>(); какое-то не самое красивое решение
-    for (Person pers : persons1) {
-      person_all.add(pers);
-    }
-    for (Person pers1 : persons2) {
-      person_all.add(pers1);
-    }
-     */
-    /**List <Person> person_all = new ArrayList<>();
-    person_all.addAll(persons2);
-    person_all.addAll(persons1);
-    */
+
     List<Person> person_all = Stream.concat(
             persons1.stream(),
             persons2.stream())

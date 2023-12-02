@@ -23,9 +23,7 @@ public class Task6 {
   public static Set<String> getPersonDescriptions(Collection<Person> persons,
                                                   Map<Integer, Set<Integer>> personAreaIds,
                                                   Collection<Area> areas) {
-      if (persons.isEmpty() || personAreaIds.isEmpty() || areas.isEmpty()) {
-          return new HashSet<>();
-      }
+
       Map<Integer, String> areaIDName = areas.stream()
               .collect(Collectors.toMap(Area::getId, Area::getName));
 

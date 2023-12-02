@@ -30,50 +30,29 @@ public class Task8 {
 
   //ну и различные имена тоже хочется
   public Set<String> getDifferentNames(List<Person> persons) {
-    return getNames(persons).stream().distinct().collect(Collectors.toSet());
+    return getNames(persons).stream().collect(Collectors.toSet());
   }
 
   //Для фронтов выдадим полное имя, а то сами не могут
   // так как проверка на null встречается частенько, то мы сделаем функцию
-  public String NotNull(String s) {
-    String s1 =  s == null ? "" : s;
-    return s1;
-  }
+
   public String convertPersonToString(Person person) {
-    String firstName = NotNull(person.getFirstName());
-    String secondName = NotNull(person.getSecondName());
-    String thirdName = NotNull(person.getMiddleName());
-    String result = Stream.of(firstName, secondName, thirdName)
+
+    return Stream.of(person.getFirstName(), person.getMiddleName(),person.getSecondName())
+            .filter(Objects::nonNull)
             .collect(Collectors.joining(" "));
-    /**if (person.getSecondName() != null) {
-      result += person.getSecondName();
-    }
 
-    if (person.getFirstName() != null) {
-      result += " " + person.getFirstName();
-    }
 
-    if (person.getSecondName() != null) {
-      result += " " + person.getSecondName();
-    }
-     */
 
-    return result;
   }
 
   // словарь id персоны -> ее имя
   public Map<Integer, String> getPersonNames(Collection<Person> persons) {
-    /** Map<Integer, String> map = new HashMap<>(1);
-    for (Person person : persons) {
-      if (!map.containsKey(person.getId())) {
-        map.put(person.getId(), convertPersonToString(person));
-      }
-    }
-     */
+
     Map<Integer, String> map = persons.stream()
             .collect(Collectors.toMap(
                     Person::getId,
-                    x -> convertPersonToString(x)
+                    Person::getFirstName
             ));
     return map;
   }
@@ -81,20 +60,13 @@ public class Task8 {
   // есть ли совпадающие в двух коллекциях персоны?
   public boolean hasSamePersons(Collection<Person> persons1, Collection<Person> persons2) {
 
-    /**
-     boolean has = false;
-     for (Person person1 : persons1) {
-      for (Person person2 : persons2) {
-        if (person1.equals(person2)) {
-          has = true;
-        }
-      }
-    }
-     */
-    persons1 = persons1.stream().collect(Collectors.toCollection(HashSet::new));
-    persons2 = persons2.stream().collect(Collectors.toCollection(HashSet::new));
-    //Set<Person> persons1_set = persons1.stream().collect(Collectors.toCollection(HashSet::new));
-    //Set<Person> persons2_set = persons2.stream().collect(Collectors.toSet());
+
+
+    Set<Person> persons1_new = new HashSet<>(persons1);
+    Set<Person> persons2_new = new HashSet<>(persons2);
+    //привел  к хэшсету, чтоб искал быстрее, тут по идее должна получиться сложность О(N),
+    // где N - кол-во элементов в persons1
+    // можно было бы, конечно, заморочиться и искать по наименьшему по длине
     for (Person pers: persons1) {
       if (persons2.contains(pers)) {
         return true;
@@ -106,8 +78,8 @@ public class Task8 {
   //...
   public long countEven(Stream<Integer> numbers) {
     count = 0;
-    numbers.filter(num -> num % 2 == 0).forEach(num -> count++);
-    // len([x for x in numbers if x % 2 == 0])
+    numbers.filter(num -> num % 2 == 0).count();
+    // а можно через .count()
     return count;
   }
 }

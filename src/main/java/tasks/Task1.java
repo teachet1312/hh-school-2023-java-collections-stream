@@ -32,4 +32,5 @@ public class Task1 {
             .map(personMap::get)
             .collect(Collectors.toList());
   }
+  // Асимптотическая сложность - О(N)
 }

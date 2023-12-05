@@ -3,7 +3,7 @@ package tasks;
 import common.Area;
 import common.Person;
 
-import javax.swing.*;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;

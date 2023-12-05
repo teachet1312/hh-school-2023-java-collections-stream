@@ -27,7 +27,6 @@ public class Task2 {
             .sorted(Comparator.comparing(Person::getCreatedAt))
             .limit(limit)
             .collect(Collectors.toList());
-
     return person_all;
   }
 }

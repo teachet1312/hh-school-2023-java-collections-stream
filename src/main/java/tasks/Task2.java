@@ -17,16 +17,14 @@ public class Task2 {
   public static List<Person> combineAndSortWithLimit(Collection<Person> persons1,
                                                      Collection<Person> persons2,
                                                      int limit) {
-    if (persons1.isEmpty() && persons2.isEmpty()) {
-      return new ArrayList<>();
-    }
 
-    List<Person> person_all = Stream.concat(
+
+    return Stream.concat(
             persons1.stream(),
             persons2.stream())
             .sorted(Comparator.comparing(Person::getCreatedAt))
             .limit(limit)
             .collect(Collectors.toList());
-    return person_all;
+
   }
 }

@@ -49,12 +49,10 @@ public class Task8 {
   // словарь id персоны -> ее имя
   public Map<Integer, String> getPersonNames(Collection<Person> persons) {
 
-    Map<Integer, String> map = persons.stream()
+    return persons.stream()
             .collect(Collectors.toMap(
                     Person::getId,
-                    Person::getFirstName
-            ));
-    return map;
+                    this::convertPersonToString, (p1, p2) -> p1));
   }
 
   // есть ли совпадающие в двух коллекциях персоны?
@@ -62,12 +60,12 @@ public class Task8 {
 
 
     Set<Person> persons1_new = new HashSet<>(persons1);
-    Set<Person> persons2_new = new HashSet<>(persons2);
+
     //привел  к хэшсету, чтоб искал быстрее, тут по идее должна получиться сложность О(N),
     // где N - кол-во элементов в persons1
     // можно было бы, конечно, заморочиться и искать по наименьшему по длине
-    for (Person pers: persons1) {
-      if (persons2.contains(pers)) {
+    for (Person person: persons2) {
+      if (persons1_new.contains(person)) {
         return true;
       }
     }
